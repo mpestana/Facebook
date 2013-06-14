@@ -1,0 +1,35 @@
+!SESSION 2013-06-14 14:51:03.728 -----------------------------------------------
+eclipse.buildId=v22.0.1-685705
+java.version=1.6.0_45
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product -product com.android.ide.eclipse.adt.package.product -keyring /Users/mcpestana/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product com.android.ide.eclipse.adt.package.product -data /Users/mcpestana/Documents/workspace/Facebook -product com.android.ide.eclipse.adt.package.product -keyring /Users/mcpestana/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-06-14 14:51:08.947
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-06-14 14:55:00.315
+!MESSAGE Failed to load properties file for project 'FacebookSDK'
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-06-14 14:55:00.320
+!MESSAGE Failed to load properties file for project 'FacebookSDK'
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-06-14 14:55:00.321
+!MESSAGE Failed to load properties file for project 'FacebookSDK'
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-06-14 14:55:00.336
+!MESSAGE Failed to load properties file for project 'FacebookSDK'
+!SESSION 2013-06-14 14:56:35.050 -----------------------------------------------
+eclipse.buildId=v22.0.1-685705
+java.version=1.7.0_21
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product -keyring /Users/mcpestana/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product com.android.ide.eclipse.adt.package.product -keyring /Users/mcpestana/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-06-14 14:56:36.773
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.core.net 1 0 2013-06-14 14:56:41.022
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
