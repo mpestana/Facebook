@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+     <TextView
+         android:id="@+id/lblEmail"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="144dp"
+         android:text="@string/e_mail"
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <com.facebook.widget.LoginButton
+         android:id="@+id/activity_login_facebook_btn_login"
+         android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        fb:login_text="Login with Facebook"
+     fb:logout_text="Logout"
+         />
+</RelativeLayout>
+
+

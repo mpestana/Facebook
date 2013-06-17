@@ -1,0 +1,98 @@
+package com.example.facebooktest;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
+import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import com.facebook.FacebookException;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.model.GraphUser;
+import com.facebook.widget.LoginButton;
+import com.facebook.widget.LoginButton.OnErrorListener;
+
+public class FriendsActivity {
+
+	final Session session = Session.getActiveSession();
+	
+	if (session != null && session.isOpened()) {
+	    // If the session is open, make an API call to get user information required for the app
+
+	    // Show the progress spinner during this network call
+	    if (fragments[FB_LOGGED_OUT_HOME] != null &&
+	            ((FBLoggedOutHomeFragment)fragments[FB_LOGGED_OUT_HOME]).progressContainer != null) {
+	        ((FBLoggedOutHomeFragment)fragments[FB_LOGGED_OUT_HOME]).progressContainer.
+	            setVisibility(View.VISIBLE);
+	    }
+
+	    // Get the user's list of friends
+	    Request friendsRequest = Request.newMyFriendsRequest(session,
+	        new Request.GraphUserListCallback() {
+
+	        @Override
+	        public void onCompleted(List<GraphUser> users, Response response) {
+	            FacebookRequestError error = response.getError();
+	            if (error != null) {
+	                Log.e(FriendSmashApplication.TAG, error.toString());
+	                handleError(error, true);
+	            } else if (session == Session.getActiveSession()) {
+	                // Set the friends attribute
+	                ((FriendSmashApplication)getApplication()).setFriends(users);
+	            }
+	        }
+	    });
+	    Bundle params = new Bundle();
+	    params.putString("fields", "name,first_name,last_name");
+	    friendsRequest.setParameters(params);
+
+	    // Get current logged in user information
+	    Request meRequest = Request.newMeRequest(session, new Request.GraphUserCallback() {
+
+	        @Override
+	        public void onCompleted(GraphUser user, Response response) {
+	            FacebookRequestError error = response.getError();
+	            if (error != null) {
+	                Log.e(FriendSmashApplication.TAG, error.toString());
+	                handleError(error, true);
+	            } else if (session == Session.getActiveSession()) {
+	                // Set the currentFBUser attribute
+	                ((FriendSmashApplication)getApplication()).setCurrentFBUser(user);
+	            }
+	        }
+	    });
+
+	    // Create a RequestBatch and add a callback once the batch of requests completes
+	    RequestBatch requestBatch = new RequestBatch(friendsRequest, meRequest);
+	    requestBatch.addCallback(new RequestBatch.Callback() {
+
+	        @Override
+	        public void onBatchCompleted(RequestBatch batch) {
+	            if ( ((FriendSmashApplication)getApplication()).getCurrentFBUser() != null &&
+	                 ((FriendSmashApplication)getApplication()).getFriends() != null ) {
+	                // Login by switching to the personalized HomeFragment
+	                loadPersonalizedFragment();
+	            } else {
+	                showError(getString(R.string.error_fetching_profile), true);
+	            }
+	        }
+	    });
+
+	    // Execute the batch of requests asynchronously
+	    requestBatch.executeAsync();
+	}
+	
+}

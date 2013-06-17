@@ -3,6 +3,7 @@ package com.example.facebooktest;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,11 +30,15 @@ public class MainActivity extends Activity {
 
  private String TAG = "MainActivity";
  private TextView lblEmail;
+ private TextView Info;
+ 
  @Override
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
+  
   lblEmail = (TextView) findViewById(R.id.lblEmail);
+  Info = (TextView) findViewById(R.id.Info);
   
   LoginButton authButton = (LoginButton) findViewById(R.id.activity_login_facebook_btn_login);
   authButton.setOnErrorListener(new OnErrorListener() {
@@ -44,7 +49,7 @@ public class MainActivity extends Activity {
    }
   });
   // set permission list, Don't foeget to add email
-  authButton.setReadPermissions(Arrays.asList("basic_info","email"));
+  authButton.setReadPermissions(Arrays.asList("basic_info","name", "user_location", "friends_location"));
   // session state call back event
   authButton.setSessionStatusCallback(new Session.StatusCallback() {
    
@@ -58,14 +63,34 @@ public class MainActivity extends Activity {
                           @Override
                           public void onCompleted(GraphUser user,Response response) {
                               if (user != null) { 
-                               Log.i(TAG,"User ID "+ user.getId());
-                               Log.i(TAG,"Email "+ user.asMap().get("email"));
+                               Log.w(TAG,"User ID: "+ user.getId());
+                               Log.w(TAG,"Name: "+ user.asMap().get("name"));
+                               Log.w(TAG,"Local: "+ user.getLocation()); //+ " " + user.getInnerJSONObject());
+                              
                                lblEmail.setText(user.asMap().get("email").toString());
-                              }
+                              } 
                           }
                       });
+
+              Request friendRequest = Request.newMyFriendsRequest(session, 
+            		  new Request.GraphUserListCallback() {				
+						@Override
+						public void onCompleted(List<GraphUser> users, Response response) {
+							// TODO Auto-generated method stub
+							for(GraphUser u : users){
+								Log.i(TAG, "Name: " + u.getName());
+								Log.i(TAG, "data: " + u.getInnerJSONObject());//u.getLocation());
+							}
+							//Log.i(TAG, "INFO"+ response.toString());
+						}
+            	});
+              Bundle params = new Bundle();
+              params.putString("fields", "id,name,location,picture,birthday");
+              
+              friendRequest.setParameters(params);
+              friendRequest.executeAsync();
+              
           }
-    
    }
   });
  }
@@ -78,5 +103,4 @@ public class MainActivity extends Activity {
  
 
 }
-
 

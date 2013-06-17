@@ -24,8 +24,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         fb:login_text="Login with Facebook"
-     fb:logout_text="Logout"
+     	fb:logout_text="Logout"
          />
+
+    <TextView
+        android:id="@+id/Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblEmail"
+        android:layout_below="@+id/lblEmail"
+        android:layout_marginTop="29dp"
+        android:text="Info: "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>
 
 
