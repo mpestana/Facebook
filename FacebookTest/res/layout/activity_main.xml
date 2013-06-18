@@ -34,7 +34,7 @@
         android:layout_alignLeft="@+id/lblEmail"
         android:layout_below="@+id/lblEmail"
         android:layout_marginTop="29dp"
-        android:text="Info: "
+        android:text="App Users': "
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
