@@ -1,8 +1,5 @@
 INDEX VERSION 1.126+/Users/mcpestana/Documents/workspace/Facebook/.metadata/.plugins/org.eclipse.jdt.core
-3848462231.index
-895353237.index
-3705013505.index
-2326629132.index
-3573865364.index
-3875304572.index
 3269954138.index
+895353237.index
+3374932793.index
+3835462444.index
